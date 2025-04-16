@@ -1,0 +1,76 @@
+apiVersion: automation.cloudbees.io/v1alpha1
+kind: action
+name: gitleaks-hybrid
+
+inputs:
+  cloudbees_pat_token: 
+    description: 'Cloudbees PAT token of User'
+    required: true
+  cloudbees_api_url: 
+    description: 'Cloudbees API URL'
+    required: true
+  run_id: 
+    description: 'GHA Run ID'
+    required: true
+  job_id:
+    description: 'GHA Job ID'
+    required: true
+  step_id:
+    description: 'GHA Step ID'
+    required: true
+  is-github-workflow:
+    description: 'Flag to indicate if the action is running in GitHub workflow'
+    required: true
+  # ref:
+  #   description: 'Flag to indicate the ref that should be archived (same as supplied to checkout)'
+  #   required: false
+  #   default: ''
+  # workspace-dir:
+  #   description: 'Flag to mention the path where the checked out code will be present'
+  #   required: false
+  #   default: ''
+
+runs:
+  using: composite
+  steps:
+    #    - name: Generate sha and ref 
+    #      uses: docker://020229604682.dkr.ecr.us-east-1.amazonaws.com/actions/assets-plugin-chain-utils:3b5ef805fbffad1cbc96feac47518fcf13153bf9
+    #      with:
+    #        entrypoint: assets-plugin-chain-utils
+    #        args: get-commit-info
+    #      env:
+    #         INPUT_CLOUDBEES_API_TOKEN: ${{ cloudbees.api.token }}
+    #         INPUT_CLOUDBEES_API_URL: ${{ cloudbees.api.url }}
+    #         INPUT_RUN_ID: ${{ cloudbees.run_id }}
+    #         INPUT_CLOUDBEES_EVENT_PATH: /cloudbees/event.json
+    #         INPUT_REF: ${{ inputs.ref }}
+    #         INPUT_WORKSPACE_DIR: ${{ inputs.workspace-dir }}
+
+    - name: Generate reference files 
+      uses: docker://020229604682.dkr.ecr.us-east-1.amazonaws.com/actions/assets-plugin-chain-utils:3b5ef805fbffad1cbc96feac47518fcf13153bf9
+      with:
+          entrypoint: assets-plugin-chain-utils
+          args: generate-references --asset-type "CODE"
+      env:
+          INPUT_CLOUDBEES_API_TOKEN: ${{ inputs.cloudbees_pat_token }}
+          INPUT_CLOUDBEES_API_URL: ${{ inputs.cloudbees_api_url }}
+          INPUT_RUN_ID: ${{ inputs.run_id }}
+          INPUT_IS_GITHUB_WORKFLOW: ${{ inputs.is-github-workflow }}
+    - name: Run gitleaks compliance plugin
+      uses: docker://020229604682.dkr.ecr.us-east-1.amazonaws.com/actions/assets-gitleaks-scanner:latest
+      env:
+          RUN_ID: ${{ inputs.run_id }}
+          JOB_ID: ${{ inputs.job_id }}
+          STEP_ID: ${{ inputs.step_id }}
+      run: /app/plugin-gitleaks-scanner -mode single
+    - name: Complete execution plan
+      uses: docker://020229604682.dkr.ecr.us-east-1.amazonaws.com/actions/assets-plugin-chain-utils:3b5ef805fbffad1cbc96feac47518fcf13153bf9
+      id: process-outputs
+      with:
+          entrypoint: assets-plugin-chain-utils
+          args: process-outputs
+      env:
+          INPUT_CLOUDBEES_API_TOKEN: ${{ inputs.cloudbees_pat_token }}
+          INPUT_CLOUDBEES_API_URL: ${{ inputs.cloudbees_api_url }}
+          INPUT_RUN_ID: ${{ inputs.run_id }}
+          INPUT_IS_GITHUB_WORKFLOW: ${{ inputs.is-github-workflow }}
