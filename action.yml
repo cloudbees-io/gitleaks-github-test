@@ -24,6 +24,7 @@ inputs:
 runs:
   using: "composite"
   steps:
+  
     - name: Generate reference files 
       shell: bash
       run: |
@@ -32,6 +33,16 @@ runs:
           -e INPUT_CLOUDBEES_API_URL="${{ inputs.cloudbees_api_url }}" \
           -e INPUT_RUN_ID="${{ inputs.run_id }}" \
           -e INPUT_IS_GITHUB_WORKFLOW="${{ inputs.is-github-workflow }}" \
+          -e GITHUB_RUN_ID="${{ github.run_id }}" \
+          -e GITHUB_WORKFLOW_REF="${{ github.workflow_ref }}" \
+          -e GITHUB_RUN_ATTEMPT="${{ github.run_attempt }}" \
+          -e GITHUB_RUN_NUMBER="${{ github.run_number }}" \
+          -e GITHUB_REF_NAME="${{ github.ref_name }}" \
+          -e GITHUB_REPOSITORY="${{ github.repository }}" \
+          -e GITHUB_SERVER_URL="${{ github.server_url }}" \
+          -e GITHUB_JOB="${{ github.job }}" \
+          -e GITHUB_PROVIDER="GITHUB" \
+          -e GITHUB_WORKSPACE="${{ github.workspace }}" \
           public.ecr.aws/l7o7z1g8/actions/assets-plugin-chain-utils:af06a82fdad168c42e8d06eaa2008d40a8408835 \
           generate-references --asset-type "CODE"
 
