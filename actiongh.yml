@@ -1,0 +1,57 @@
+name: gitleaks-hybrid
+description: Run gitleaks compliance scan with CloudBees hybrid integration
+
+inputs:
+  cloudbees_pat_token: 
+    description: Cloudbees PAT token of User
+    required: true
+  cloudbees_api_url: 
+    description: Cloudbees API URL
+    required: true
+  run_id: 
+    description: GHA Run ID
+    required: true
+  job_id:
+    description: GHA Job ID
+    required: true
+  step_id:
+    description: GHA Step ID
+    required: true
+  is-github-workflow:
+    description: Flag to indicate if the action is running in GitHub workflow
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Generate reference files 
+      shell: bash
+      run: |
+        docker run --rm \
+          -e INPUT_CLOUDBEES_API_TOKEN="${{ inputs.cloudbees_pat_token }}" \
+          -e INPUT_CLOUDBEES_API_URL="${{ inputs.cloudbees_api_url }}" \
+          -e INPUT_RUN_ID="${{ inputs.run_id }}" \
+          -e INPUT_IS_GITHUB_WORKFLOW="${{ inputs.is-github-workflow }}" \
+          public.ecr.aws/l7o7z1g8/actions/assets-plugin-chain-utils:af06a82fdad168c42e8d06eaa2008d40a8408835 \
+          assets-plugin-chain-utils generate-references --asset-type "CODE"
+
+    - name: Run gitleaks compliance plugin
+      shell: bash
+      run: |
+        docker run --rm \
+          -e RUN_ID="${{ inputs.run_id }}" \
+          -e JOB_ID="${{ inputs.job_id }}" \
+          -e STEP_ID="${{ inputs.step_id }}" \
+          public.ecr.aws/l7o7z1g8/actions/assets-gitleaks-scanner:ff0ca194ecb33e2eb6c5ba18c9b9a6ca905c4af0 \
+          /app/plugin-gitleaks-scanner -mode single
+
+    - name: Complete execution plan
+      shell: bash
+      run: |
+        docker run --rm \
+          -e INPUT_CLOUDBEES_API_TOKEN="${{ inputs.cloudbees_pat_token }}" \
+          -e INPUT_CLOUDBEES_API_URL="${{ inputs.cloudbees_api_url }}" \
+          -e INPUT_RUN_ID="${{ inputs.run_id }}" \
+          -e INPUT_IS_GITHUB_WORKFLOW="${{ inputs.is-github-workflow }}" \
+          public.ecr.aws/l7o7z1g8/actions/assets-plugin-chain-utils:af06a82fdad168c42e8d06eaa2008d40a8408835 \
+          assets-plugin-chain-utils process-outputs
