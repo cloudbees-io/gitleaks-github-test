@@ -39,7 +39,7 @@ runs:
           -e GITHUB_RUN_NUMBER="${{ github.run_number }}" \
           -e GITHUB_REF_NAME="${{ github.ref_name }}" \
           -e GITHUB_REPOSITORY="${{ github.repository }}" \
-          -e GITHUB_SERVER_URL="${{ github.server_url }}" \
+          -e GITHUB_SERVER_URL="${{ github.server_url }}/${{ github.repository }}" \
           -e GITHUB_JOB="${{ github.job }}" \
           -e GITHUB_PROVIDER="GITHUB" \
           -e GITHUB_WORKSPACE="${{ github.workspace }}" \
