@@ -29,6 +29,7 @@ runs:
       shell: bash
       run: |
         docker run --rm \
+          -v $GITHUB_WORKSPACE:$GITHUB_WORKSPACE \
           -e INPUT_CLOUDBEES_API_TOKEN="${{ inputs.cloudbees_pat_token }}" \
           -e INPUT_CLOUDBEES_API_URL="${{ inputs.cloudbees_api_url }}" \
           -e INPUT_RUN_ID="14377182881" \
@@ -50,6 +51,7 @@ runs:
       shell: bash
       run: |
         docker run --rm \
+          -v $GITHUB_WORKSPACE:$GITHUB_WORKSPACE \
           -e RUN_ID="${{ inputs.run_id }}" \
           -e JOB_ID="${{ inputs.job_id }}" \
           -e STEP_ID="${{ inputs.step_id }}" \
