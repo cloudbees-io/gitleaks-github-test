@@ -55,8 +55,8 @@ runs:
           -e RUN_ID="${{ inputs.run_id }}" \
           -e JOB_ID="${{ inputs.job_id }}" \
           -e STEP_ID="${{ inputs.step_id }}" \
-          public.ecr.aws/l7o7z1g8/actions/assets-gitleaks-scanner:ff0ca194ecb33e2eb6c5ba18c9b9a6ca905c4af0 \
-          /app/plugin-gitleaks-scanner --mode single
+          public.ecr.aws/l7o7z1g8/actions/assets-gitleaks-scanner:3622ab1201a4a9b9692f24407a363334a6b08fa9 \
+          -- -mode single
 
     - name: Complete execution plan
       shell: bash
