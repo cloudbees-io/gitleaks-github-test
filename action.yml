@@ -52,6 +52,7 @@ runs:
       run: |
         docker run --rm \
           -v $GITHUB_WORKSPACE:$GITHUB_WORKSPACE \
+          -e GITHUB_WORKSPACE="$GITHUB_WORKSPACE" \
           -e RUN_ID="${{ inputs.run_id }}" \
           -e JOB_ID="${{ inputs.job_id }}" \
           -e STEP_ID="${{ inputs.step_id }}" \
