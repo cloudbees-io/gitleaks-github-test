@@ -45,7 +45,7 @@ runs:
           -e GITHUB_PROVIDER="GITHUB" \
           -e GITHUB_WORKSPACE="$GITHUB_WORKSPACE" \
           -e GITHUB_ENV="$GITHUB_ENV" \
-          public.ecr.aws/l7o7z1g8/actions/assets-plugin-chain-utils:baea9e30e6056e17d0129880b7cabbdaaf41d1d3 \
+          public.ecr.aws/l7o7z1g8/actions/assets-plugin-chain-utils:9b2df5387f9bc1d151cae6a1e5b24e386ced1219 \
           generate-references --asset-type "CODE"
 
     # - name: List files in workspace
@@ -86,13 +86,6 @@ runs:
           -e GITHUB_JOB="${{ github.job }}" \
           -e GITHUB_PROVIDER="GITHUB" \
           -e GITHUB_WORKSPACE="$GITHUB_WORKSPACE" \
-          public.ecr.aws/l7o7z1g8/actions/assets-plugin-chain-utils:baea9e30e6056e17d0129880b7cabbdaaf41d1d3 \
+          public.ecr.aws/l7o7z1g8/actions/assets-plugin-chain-utils:9b2df5387f9bc1d151cae6a1e5b24e386ced1219 \
           process-outputs
-
-    - name: List files under store in workspace
-      shell: bash
-      run: |
-        echo "Current working directory: $(pwd)"
-        echo "Contents of workspace:"
-        ls -laR $GITHUB_WORKSPACE/store
 
