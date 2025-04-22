@@ -47,6 +47,12 @@ runs:
           public.ecr.aws/l7o7z1g8/actions/assets-plugin-chain-utils:0987702cf0f32ab42040f4ed6f852a6cfe4b21d0 \
           generate-references --asset-type "CODE"
 
+    - name: List files in workspace
+      run: |
+        echo "Current working directory: $(pwd)"
+        echo "Contents of workspace:"
+        ls -laR $GITHUB_WORKSPACE
+
     - name: Run gitleaks compliance plugin
       shell: bash
       run: |
