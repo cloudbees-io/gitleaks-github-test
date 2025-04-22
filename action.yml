@@ -44,6 +44,7 @@ runs:
           -e GITHUB_JOB="${{ github.job }}" \
           -e GITHUB_PROVIDER="GITHUB" \
           -e GITHUB_WORKSPACE="$GITHUB_WORKSPACE" \
+          -e GITHUB_ENV="$GITHUB_ENV" \
           public.ecr.aws/l7o7z1g8/actions/assets-plugin-chain-utils:1251a63067abc629650f98eb6d9a75860fb9c1d3 \
           generate-references --asset-type "CODE"
 
@@ -73,7 +74,7 @@ runs:
           -v $GITHUB_WORKSPACE:$GITHUB_WORKSPACE \
           -e INPUT_CLOUDBEES_API_TOKEN="${{ inputs.cloudbees_pat_token }}" \
           -e INPUT_CLOUDBEES_API_URL="${{ inputs.cloudbees_api_url }}" \
-          -e INPUT_RUN_ID=$CLOUDBEES_RUN_ID \
+          -e INPUT_RUN_ID="$CLOUDBEES_RUN_ID" \
           -e GITHUB_RUN_ID="14377182881" \
           -e INPUT_IS_GITHUB_WORKFLOW="${{ inputs.is-github-workflow }}" \
           -e GITHUB_WORKFLOW_REF="hjs-testing/gha-deeper-integration-testing/.github/workflows/test-results.yml@refs/heads/main" \
