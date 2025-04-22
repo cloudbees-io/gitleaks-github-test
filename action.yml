@@ -44,7 +44,7 @@ runs:
           -e GITHUB_JOB="${{ github.job }}" \
           -e GITHUB_PROVIDER="GITHUB" \
           -e GITHUB_WORKSPACE="$GITHUB_WORKSPACE" \
-          public.ecr.aws/l7o7z1g8/actions/assets-plugin-chain-utils:0987702cf0f32ab42040f4ed6f852a6cfe4b21d0 \
+          public.ecr.aws/l7o7z1g8/actions/assets-plugin-chain-utils:1251a63067abc629650f98eb6d9a75860fb9c1d3 \
           generate-references --asset-type "CODE"
 
     # - name: List files in workspace
@@ -73,7 +73,7 @@ runs:
           -v $GITHUB_WORKSPACE:$GITHUB_WORKSPACE \
           -e INPUT_CLOUDBEES_API_TOKEN="${{ inputs.cloudbees_pat_token }}" \
           -e INPUT_CLOUDBEES_API_URL="${{ inputs.cloudbees_api_url }}" \
-          -e INPUT_RUN_ID="0ef89b16-b3a6-4c2d-aeef-a3d30f20e872" \
+          -e INPUT_RUN_ID=$CLOUDBEES_RUN_ID \
           -e GITHUB_RUN_ID="14377182881" \
           -e INPUT_IS_GITHUB_WORKFLOW="${{ inputs.is-github-workflow }}" \
           -e GITHUB_WORKFLOW_REF="hjs-testing/gha-deeper-integration-testing/.github/workflows/test-results.yml@refs/heads/main" \
@@ -85,7 +85,7 @@ runs:
           -e GITHUB_JOB="${{ github.job }}" \
           -e GITHUB_PROVIDER="GITHUB" \
           -e GITHUB_WORKSPACE="$GITHUB_WORKSPACE" \
-          public.ecr.aws/l7o7z1g8/actions/assets-plugin-chain-utils:0987702cf0f32ab42040f4ed6f852a6cfe4b21d0 \
+          public.ecr.aws/l7o7z1g8/actions/assets-plugin-chain-utils:1251a63067abc629650f98eb6d9a75860fb9c1d3 \
           process-outputs
 
     - name: List files under store in workspace
