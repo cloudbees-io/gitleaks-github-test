@@ -48,6 +48,7 @@ runs:
           generate-references --asset-type "CODE"
 
     - name: List files in workspace
+      shell: bash
       run: |
         echo "Current working directory: $(pwd)"
         echo "Contents of workspace:"
