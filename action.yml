@@ -73,7 +73,8 @@ runs:
           -v $GITHUB_WORKSPACE:$GITHUB_WORKSPACE \
           -e INPUT_CLOUDBEES_API_TOKEN="${{ inputs.cloudbees_pat_token }}" \
           -e INPUT_CLOUDBEES_API_URL="${{ inputs.cloudbees_api_url }}" \
-          -e INPUT_RUN_ID="${{ inputs.run_id }}" \
+          -e INPUT_RUN_ID="0ef89b16-b3a6-4c2d-aeef-a3d30f20e872" \
+          -e GITHUB_RUN_ID="14377182881" \
           -e INPUT_IS_GITHUB_WORKFLOW="${{ inputs.is-github-workflow }}" \
           -e GITHUB_WORKFLOW_REF="hjs-testing/gha-deeper-integration-testing/.github/workflows/test-results.yml@refs/heads/main" \
           -e GITHUB_RUN_ATTEMPT="1" \
