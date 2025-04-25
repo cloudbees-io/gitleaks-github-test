@@ -74,7 +74,7 @@ runs:
       shell: bash
       run: |
         docker run --rm \
-          --user $(id -u):$(id -g) \
+          -u root \
           -v $GITHUB_WORKSPACE:$GITHUB_WORKSPACE \
           -e GITHUB_WORKSPACE="$GITHUB_WORKSPACE" \
           -e RUN_ID="${{ inputs.run_id }}" \
