@@ -38,9 +38,9 @@ runs:
          -e GITHUB_WORKSPACE="$GITHUB_WORKSPACE" \
          -e GITHUB_ENV="$GITHUB_ENV" \
          public.ecr.aws/l7o7z1g8/actions/assets-plugin-chain-utils:05a491580f77c8df5fb2f8b2176c4cbcc0bd37fd \
-         get-commit-info
+         bash -c "git config --global --add safe.directory $GITHUB_WORKSPACE && get-commit-info
          
-  
+    - name: Create tar
     - name: Generate reference files 
       shell: bash
       run: |
