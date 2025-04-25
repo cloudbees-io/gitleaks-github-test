@@ -70,12 +70,6 @@ runs:
     #     echo "Contents of workspace:"
     #     ls -laR $GITHUB_WORKSPACE/store
 
-    - name: Set permissions for store
-      shell: bash
-      run: |
-        mkdir -p "$GITHUB_WORKSPACE/store"
-        chmod -R 777 "$GITHUB_WORKSPACE/store"
-
     - name: Run gitleaks compliance plugin
       shell: bash
       run: |
