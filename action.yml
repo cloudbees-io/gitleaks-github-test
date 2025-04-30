@@ -41,7 +41,7 @@ runs:
     #      get-commit-info
 
     - name: Create request JSON file in workspace
-        run: |
+      run: |
           FILE_PATH="$GITHUB_WORKSPACE/store/request/request.json"
           mkdir -p "$(dirname "$FILE_PATH")"
           touch "$FILE_PATH"
@@ -51,7 +51,6 @@ runs:
       shell: bash
       run: |
         docker run --rm \
-          -u root \
           -v $GITHUB_WORKSPACE:$GITHUB_WORKSPACE \
           -e INPUT_CLOUDBEES_API_TOKEN="${{ inputs.cloudbees_pat_token }}" \
           -e INPUT_CLOUDBEES_API_URL="${{ inputs.cloudbees_api_url }}" \
