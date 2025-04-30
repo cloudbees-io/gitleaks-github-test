@@ -1,14 +1,13 @@
 name: gitleaks-hybrid
 description: Run gitleaks compliance scan with CloudBees hybrid integration
-
 inputs:
-  cloudbees_pat_token: 
+  cloudbees_pat_token:
     description: Cloudbees PAT token of User
     required: true
-  cloudbees_api_url: 
+  cloudbees_api_url:
     description: Cloudbees API URL
     required: true
-  run_id: 
+  run_id:
     description: GHA Run ID
     required: true
   job_id:
@@ -20,12 +19,10 @@ inputs:
   is-github-workflow:
     description: Flag to indicate if the action is running in GitHub workflow
     required: true
-
 runs:
-  using: "composite"
+  using: composite
   steps:
-
-   - name: Get commit or ref info
+    - name: Get commit or ref info
       shell: bash
       run: |
         docker run --rm \
@@ -40,16 +37,14 @@ runs:
          -e GITHUB_ENV="$GITHUB_ENV" \
          public.ecr.aws/l7o7z1g8/actions/assets-plugin-chain-utils:05a491580f77c8df5fb2f8b2176c4cbcc0bd37fd \
          -c "git config --global --add safe.directory '$GITHUB_WORKSPACE' && get-commit-info"
-
     - name: Create request JSON file in workspace
       shell: bash
       run: |
-          FILE_PATH="$GITHUB_WORKSPACE/store/request/request.json"
-          mkdir -p "$(dirname "$FILE_PATH")"
-          touch "$FILE_PATH"
-          echo "File created at: $FILE_PATH"
-         
-    - name: Generate reference files 
+        FILE_PATH="$GITHUB_WORKSPACE/store/request/request.json"
+        mkdir -p "$(dirname "$FILE_PATH")"
+        touch "$FILE_PATH"
+        echo "File created at: $FILE_PATH"
+    - name: Generate reference files
       shell: bash
       run: |
         docker run --rm \
@@ -71,14 +66,6 @@ runs:
           -e GITHUB_ENV="$GITHUB_ENV" \
           public.ecr.aws/l7o7z1g8/actions/assets-plugin-chain-utils:8da673495503e1d2ad43d1de8d7d31ef12818059 \
           generate-references --asset-type "CODE"
-
-    # - name: List files in workspace
-    #   shell: bash
-    #   run: |
-    #     echo "Current working directory: $(pwd)"
-    #     echo "Contents of workspace:"
-    #     ls -laR $GITHUB_WORKSPACE/store
-
     - name: Run gitleaks compliance plugin
       shell: bash
       run: |
@@ -91,7 +78,6 @@ runs:
           -e STEP_ID="${{ inputs.step_id }}" \
           public.ecr.aws/l7o7z1g8/actions/assets-gitleaks-scanner:3622ab1201a4a9b9692f24407a363334a6b08fa9 \
           --mode single
-
     - name: Complete execution plan
       shell: bash
       run: |
@@ -114,4 +100,3 @@ runs:
           -e GITHUB_ENV="$GITHUB_ENV" \
           public.ecr.aws/l7o7z1g8/actions/assets-plugin-chain-utils:8da673495503e1d2ad43d1de8d7d31ef12818059 \
           process-outputs
-
