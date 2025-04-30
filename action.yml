@@ -41,6 +41,7 @@ runs:
     #      get-commit-info
 
     - name: Create request JSON file in workspace
+      shell: bash
       run: |
           FILE_PATH="$GITHUB_WORKSPACE/store/request/request.json"
           mkdir -p "$(dirname "$FILE_PATH")"
