@@ -60,7 +60,7 @@ runs:
           -e GITHUB_PROVIDER="GITHUB" \
           -e GITHUB_WORKSPACE="$GITHUB_WORKSPACE" \
           -e GITHUB_ENV="$GITHUB_ENV" \
-          public.ecr.aws/l7o7z1g8/actions/assets-plugin-chain-utils:8da673495503e1d2ad43d1de8d7d31ef12818059 \
+          public.ecr.aws/l7o7z1g8/actions/assets-plugin-chain-utils:47e0cebc1e3dcb71661bdefe80a5dde86fd64acf \
           generate-references --asset-type "CODE"
 
     # - name: List files in workspace
@@ -103,6 +103,6 @@ runs:
           -e GITHUB_PROVIDER="GITHUB" \
           -e GITHUB_WORKSPACE="$GITHUB_WORKSPACE" \
           -e GITHUB_ENV="$GITHUB_ENV" \
-          public.ecr.aws/l7o7z1g8/actions/assets-plugin-chain-utils:8da673495503e1d2ad43d1de8d7d31ef12818059 \
+          public.ecr.aws/l7o7z1g8/actions/assets-plugin-chain-utils:47e0cebc1e3dcb71661bdefe80a5dde86fd64acf \
           process-outputs
 
