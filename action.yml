@@ -25,20 +25,21 @@ runs:
   using: "composite"
   steps:
 
-    # - name: Get commit or ref info
-    #   shell: bash
-    #   run: |
-    #     docker run --rm \
-    #      -v $GITHUB_WORKSPACE:$GITHUB_WORKSPACE \
-    #      -e INPUT_CLOUDBEES_API_TOKEN="${{ inputs.cloudbees_pat_token }}" \
-    #      -e INPUT_CLOUDBEES_API_URL="${{ inputs.cloudbees_api_url }}" \
-    #      -e INPUT_IS_GITHUB_WORKFLOW="${{ inputs.is-github-workflow }}" \
-    #      -e INPUT_RUN_ID="14377182881" \
-    #      -e GITHUB_REF="${{ github.ref_name }}" \
-    #      -e GITHUB_WORKSPACE="$GITHUB_WORKSPACE" \
-    #      -e GITHUB_ENV="$GITHUB_ENV" \
-    #      public.ecr.aws/l7o7z1g8/actions/assets-plugin-chain-utils:05a491580f77c8df5fb2f8b2176c4cbcc0bd37fd \
-    #      get-commit-info
+    - name: Get commit or ref info
+      shell: bash
+      run: |
+        docker run --rm \
+         -u root \
+         -v $GITHUB_WORKSPACE:$GITHUB_WORKSPACE \
+         -e INPUT_CLOUDBEES_API_TOKEN="${{ inputs.cloudbees_pat_token }}" \
+         -e INPUT_CLOUDBEES_API_URL="${{ inputs.cloudbees_api_url }}" \
+         -e INPUT_IS_GITHUB_WORKFLOW="${{ inputs.is-github-workflow }}" \
+         -e INPUT_RUN_ID="14377182881" \
+         -e GITHUB_REF="${{ github.ref_name }}" \
+         -e GITHUB_WORKSPACE="$GITHUB_WORKSPACE" \
+         -e GITHUB_ENV="$GITHUB_ENV" \
+         public.ecr.aws/l7o7z1g8/actions/assets-plugin-chain-utils:05a491580f77c8df5fb2f8b2176c4cbcc0bd37fd \
+         get-commit-info
 
     - name: Create request JSON file in workspace
       shell: bash
