@@ -42,9 +42,10 @@ runs:
 
           
     - name: Create tar of source code
-        run: |
-          tar -cvf output.tar .
-          tar -tf output.tar
+      shell: bash
+      run: |
+        tar -cvf output.tar .
+        tar -tf output.tar
 
     - name: Create request JSON file in workspace
       shell: bash
