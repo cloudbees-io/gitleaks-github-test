@@ -47,15 +47,15 @@ runs:
           -v $GITHUB_WORKSPACE:$GITHUB_WORKSPACE \
           -e INPUT_CLOUDBEES_API_TOKEN="${{ inputs.cloudbees_pat_token }}" \
           -e INPUT_CLOUDBEES_API_URL="${{ inputs.cloudbees_api_url }}" \
-          -e INPUT_RUN_ID="14754340326" \
+          -e INPUT_RUN_ID="14769369987" \
           -e INPUT_IS_GITHUB_WORKFLOW="${{ inputs.is-github-workflow }}" \
-          -e GITHUB_RUN_ID="14754340326" \
-          -e GITHUB_WORKFLOW_REF="AmitRamachandrann/cafe/.github/workflows/gitleaks_gha.yaml@refs/heads/demo-gha" \
+          -e GITHUB_RUN_ID="14769369987" \
+          -e GITHUB_WORKFLOW_REF="AmitRamachandrann/vuln-scan-repo/.github/workflows/gitleaks.yaml@refs/heads/main" \
           -e GITHUB_RUN_ATTEMPT="1" \
-          -e GITHUB_RUN_NUMBER="36" \
-          -e GITHUB_REF_NAME="demo-gha" \
-          -e GITHUB_REPOSITORY="AmitRamachandrann/cafe" \
-          -e GITHUB_SERVER_URL="https://github.com/AmitRamachandrann/cafe" \
+          -e GITHUB_RUN_NUMBER="1" \
+          -e GITHUB_REF_NAME="main" \
+          -e GITHUB_REPOSITORY="AmitRamachandrann/vuln-scan-repo" \
+          -e GITHUB_SERVER_URL="https://github.com/AmitRamachandrann/vuln-scan-repo" \
           -e GITHUB_JOB="${{ github.job }}" \
           -e GITHUB_PROVIDER="GITHUB" \
           -e GITHUB_WORKSPACE="$GITHUB_WORKSPACE" \
@@ -90,15 +90,15 @@ runs:
           -v $GITHUB_WORKSPACE:$GITHUB_WORKSPACE \
           -e INPUT_CLOUDBEES_API_TOKEN="${{ inputs.cloudbees_pat_token }}" \
           -e INPUT_CLOUDBEES_API_URL="${{ inputs.cloudbees_api_url }}" \
-          -e INPUT_RUN_ID="14754340326" \
+          -e INPUT_RUN_ID="14769369987" \
           -e INPUT_IS_GITHUB_WORKFLOW="${{ inputs.is-github-workflow }}" \
-          -e GITHUB_RUN_ID="14754340326" \
-          -e GITHUB_WORKFLOW_REF="AmitRamachandrann/cafe/.github/workflows/gitleaks_gha.yaml@refs/heads/demo-gha" \
+          -e GITHUB_RUN_ID="14769369987" \
+          -e GITHUB_WORKFLOW_REF="AmitRamachandrann/vuln-scan-repo/.github/workflows/gitleaks.yaml@refs/heads/main" \
           -e GITHUB_RUN_ATTEMPT="1" \
-          -e GITHUB_RUN_NUMBER="36" \
-          -e GITHUB_REF_NAME="demo-gha" \
-          -e GITHUB_REPOSITORY="AmitRamachandrann/cafe" \
-          -e GITHUB_SERVER_URL="https://github.com/AmitRamachandrann/cafe" \
+          -e GITHUB_RUN_NUMBER="1" \
+          -e GITHUB_REF_NAME="main" \
+          -e GITHUB_REPOSITORY="AmitRamachandrann/vuln-scan-repo" \
+          -e GITHUB_SERVER_URL="https://github.com/AmitRamachandrann/vuln-scan-repo" \
           -e GITHUB_JOB="${{ github.job }}" \
           -e GITHUB_PROVIDER="GITHUB" \
           -e GITHUB_WORKSPACE="$GITHUB_WORKSPACE" \
