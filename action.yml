@@ -38,6 +38,10 @@ runs:
         mkdir -p "$(dirname "$FILE_PATH")"
         touch "$FILE_PATH"
         echo "File created at: $FILE_PATH"
+
+    - name: Wait for 60 seconds
+      shell: bash
+      run: sleep 60
   
     - name: Generate reference files 
       shell: bash
