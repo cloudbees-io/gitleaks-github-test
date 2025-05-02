@@ -78,5 +78,5 @@ runs:
           -e INPUT_CLOUDBEES_API_URL="${{ inputs.cloudbees_api_url }}" \
           -e INPUT_RUN_ID="${{ inputs.run_id }}" \
           -e INPUT_IS_GITHUB_WORKFLOW="${{ inputs.is-github-workflow }}" \
-          public.ecr.aws/l7o7z1g8/actions/assets-plugin-chain-utils:af06a82fdad168c42e8d06eaa2008d40a8408835 \
+          public.ecr.aws/l7o7z1g8/actions/assets-plugin-chain-utils:0dea78066b1aecbca8a3a6674aade8ee49b5d57a \
           process-outputs
