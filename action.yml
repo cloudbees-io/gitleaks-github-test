@@ -57,7 +57,7 @@ runs:
           -e GITHUB_JOB="${{ github.job }}" \
           -e GITHUB_PROVIDER="GITHUB" \
           -e GITHUB_WORKSPACE="${{ github.workspace }}" \
-          public.ecr.aws/l7o7z1g8/actions/assets-plugin-chain-utils:af06a82fdad168c42e8d06eaa2008d40a8408835 \
+          public.ecr.aws/l7o7z1g8/actions/assets-plugin-chain-utils:0dea78066b1aecbca8a3a6674aade8ee49b5d57a \
           generate-references --asset-type "CODE"
 
     - name: Run gitleaks compliance plugin
