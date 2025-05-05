@@ -10,16 +10,20 @@ inputs:
     required: true
   run_id: 
     description: GHA Run ID
-    required: true
+    required: false
+    default: ''
   job_id:
     description: GHA Job ID
-    required: true
+    required: false
+    default: ''
   step_id:
     description: GHA Step ID
-    required: true
+    required: false
+    default: ''
   is-github-workflow:
     description: Flag to indicate if the action is running in GitHub workflow
-    required: true
+    required: false
+    default: true
 
 runs:
   using: "composite"
@@ -38,10 +42,6 @@ runs:
         mkdir -p "$(dirname "$FILE_PATH")"
         touch "$FILE_PATH"
         echo "File created at: $FILE_PATH"
-
-    - name: Wait for 60 seconds
-      shell: bash
-      run: sleep 60
   
     - name: Generate reference files 
       shell: bash
@@ -61,6 +61,7 @@ runs:
           -e GITHUB_JOB="${{ github.job }}" \
           -e GITHUB_PROVIDER="GITHUB" \
           -e GITHUB_WORKSPACE="${{ github.workspace }}" \
+          -e GITHUB_ENV="$GITHUB_ENV" \
           public.ecr.aws/l7o7z1g8/actions/assets-plugin-chain-utils:0dea78066b1aecbca8a3a6674aade8ee49b5d57a \
           generate-references --asset-type "CODE"
 
@@ -68,19 +69,33 @@ runs:
       shell: bash
       run: |
         docker run --rm \
+          -u root \
+          -v $GITHUB_WORKSPACE:$GITHUB_WORKSPACE \
+          -e GITHUB_WORKSPACE="$GITHUB_WORKSPACE" \
           -e RUN_ID="${{ inputs.run_id }}" \
           -e JOB_ID="${{ inputs.job_id }}" \
           -e STEP_ID="${{ inputs.step_id }}" \
-          public.ecr.aws/l7o7z1g8/actions/assets-gitleaks-scanner:ff0ca194ecb33e2eb6c5ba18c9b9a6ca905c4af0 \
-          /app/plugin-gitleaks-scanner -mode single
+          public.ecr.aws/l7o7z1g8/actions/assets-gitleaks-scanner:3622ab1201a4a9b9692f24407a363334a6b08fa9 \
+          --mode single
 
     - name: Complete execution plan
       shell: bash
       run: |
-        docker run --rm \
+       docker run --rm \
           -e INPUT_CLOUDBEES_API_TOKEN="${{ inputs.cloudbees_pat_token }}" \
           -e INPUT_CLOUDBEES_API_URL="${{ inputs.cloudbees_api_url }}" \
-          -e INPUT_RUN_ID="${{ inputs.run_id }}" \
+          -e INPUT_RUN_ID="${{ github.run_id }}" \
           -e INPUT_IS_GITHUB_WORKFLOW="${{ inputs.is-github-workflow }}" \
+          -e GITHUB_RUN_ID="${{ github.run_id }}" \
+          -e GITHUB_WORKFLOW_REF="${{ github.workflow_ref }}" \
+          -e GITHUB_RUN_ATTEMPT="${{ github.run_attempt }}" \
+          -e GITHUB_RUN_NUMBER="${{ github.run_number }}" \
+          -e GITHUB_REF_NAME="${{ github.ref_name }}" \
+          -e GITHUB_REPOSITORY="${{ github.repository }}" \
+          -e GITHUB_SERVER_URL="${{ github.server_url }}/${{ github.repository }}" \
+          -e GITHUB_JOB="${{ github.job }}" \
+          -e GITHUB_PROVIDER="GITHUB" \
+          -e GITHUB_WORKSPACE="${{ github.workspace }}" \
+          -e GITHUB_ENV="$GITHUB_ENV" \
           public.ecr.aws/l7o7z1g8/actions/assets-plugin-chain-utils:0dea78066b1aecbca8a3a6674aade8ee49b5d57a \
           process-outputs
