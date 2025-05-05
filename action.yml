@@ -29,10 +29,10 @@ runs:
   using: "composite"
   steps:
 
-    # - name: Create tar of source code
-    #   shell: bash
-    #   run: |
-    #     tar -cvf output.tar .
+    - name: Create tar of source code
+      shell: bash
+      run: |
+        tar -cvf output.tar .
 
     - name: Create request JSON file in workspace
       shell: bash
@@ -61,7 +61,7 @@ runs:
           -e GITHUB_PROVIDER="GITHUB" \
           -e GITHUB_WORKSPACE="${{ github.workspace }}" \
           -e GITHUB_ENV="$GITHUB_ENV" \
-          public.ecr.aws/l7o7z1g8/actions/assets-plugin-chain-utils:2fa14429a5628e268b36e01f5dc7bd455e5b90c4 \
+          public.ecr.aws/l7o7z1g8/actions/assets-plugin-chain-utils:0dea78066b1aecbca8a3a6674aade8ee49b5d57a \
           generate-references --asset-type "CODE"
 
     - name: Run gitleaks compliance plugin
