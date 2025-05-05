@@ -33,7 +33,6 @@ runs:
       shell: bash
       run: |
         tar -cvf output.tar .
-        tar -tf output.tar
 
     - name: Create request JSON file in workspace
       shell: bash
@@ -41,7 +40,6 @@ runs:
         FILE_PATH="$GITHUB_WORKSPACE/store/request/request.json"
         mkdir -p "$(dirname "$FILE_PATH")"
         touch "$FILE_PATH"
-        echo "File created at: $FILE_PATH"
   
     - name: Generate reference files 
       shell: bash
