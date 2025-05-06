@@ -9,7 +9,7 @@ inputs:
     description: Cloudbees API URL
     required: false
     default: 'https://api.cloudbees.io'
-  step_id:
+  step-id:
     description: GHA Step ID
     required: false
     default: ''
@@ -62,7 +62,7 @@ runs:
           -e GITHUB_WORKSPACE="$GITHUB_WORKSPACE" \
           -e RUN_ID="${{ github.run_id }}" \
           -e JOB_ID="${{ github.job }}" \
-          -e STEP_ID="${{ inputs.step_id }}" \
+          -e STEP_ID="${{ inputs.step-id }}" \
           public.ecr.aws/l7o7z1g8/actions/assets-gitleaks-scanner:3622ab1201a4a9b9692f24407a363334a6b08fa9 \
           --mode single
 
