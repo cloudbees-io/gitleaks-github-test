@@ -8,7 +8,7 @@ inputs:
   cloudbees-url: 
     description: Cloudbees API URL
     required: false
-    default: 'https://api.cloudbees.com'
+    default: 'https://api.cloudbees.io'
   step_id:
     description: GHA Step ID
     required: false
