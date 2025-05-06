@@ -1,0 +1,55 @@
+= GitHub action: Scan with Gitleaks SAST
+
+Use this action to perform static application security testing (SAST) on a repository with the Gitleaks scanner.
+
+== Prequisites
+
+Set up the CloudBees platform and GHA to work together, providing key features of the platform to GHA workflows.
+Refer to link:https://docs.cloudbees.com/docs/cloudbees-platform/latest/github-actions/gha-getting-started[Getting started with GHA integration] for more information.
+
+== Inputs
+
+[cols="2a,1a,1a,3a",options="header"]
+.Input details
+|===
+
+| Input name
+| Data type
+| Required?
+| Description
+
+| `cloudbees-pat`
+| String
+| Yes
+| Specify the PAT token obtained from Cloudbees.
+
+| `cloudbees-url`
+| String
+| No
+| The CloudBees platform URL. The default value is "https://api.cloudbees.io".
+
+|===
+
+== Usage example
+
+In your YAML file, add:
+
+[source,yaml]
+----
+
+      - name: Scan with Gitleaks
+        uses: https://github.com/cloudbees-io/gitleaks-github-test@v1
+        with:
+          cloudbees-pat : secrets.PAT 
+
+----
+
+== License
+
+This code is made available under the 
+link:https://opensource.org/license/mit/[MIT license].
+
+== References
+
+* Learn more about link:https://docs.cloudbees.com/docs/cloudbees-platform/latest/github-actions/intro[Using GitHub Actions with the CloudBees platform].
+* Learn about link:https://docs.cloudbees.com/docs/cloudbees-platform/latest/[the CloudBees platform].
