@@ -9,14 +9,6 @@ inputs:
     description: Cloudbees API URL
     required: false
     default: 'https://api.cloudbees.com'
-  run_id: 
-    description: GHA Run ID
-    required: false
-    default: ''
-  job_id:
-    description: GHA Job ID
-    required: false
-    default: ''
   step_id:
     description: GHA Step ID
     required: false
