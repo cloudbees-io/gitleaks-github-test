@@ -63,7 +63,7 @@ runs:
           -e RUN_ID="${{ github.run_id }}" \
           -e JOB_ID="${{ github.job }}" \
           -e STEP_ID="${{ inputs.step-id }}" \
-          public.ecr.aws/l7o7z1g8/actions/assets-gitleaks-scanner:73db531481f0cbda6cd43fc9232f65844cbf8994 \
+          public.ecr.aws/l7o7z1g8/actions/assets-gitleaks-scanner:3622ab1201a4a9b9692f24407a363334a6b08fa9 \
           --mode single
 
     - name: Complete execution plan
