@@ -31,7 +31,6 @@ runs:
       shell: bash
       run: |
         docker run --rm \
-        docker run --rm \
           -v $GITHUB_WORKSPACE:$GITHUB_WORKSPACE \
           -e INPUT_CLOUDBEES_API_URL="${{ inputs.cloudbees-url }}" \
           -e INPUT_RUN_ID="${{ github.run_id }}" \
